@@ -45,12 +45,12 @@ class MainTabBarController: UITabBarController {
     // MARK: - Private functions -
 
     private func setupViewControllers() {
-        profileViewController = NewsScreenController()
+        profileViewController = ProfileScreenAsembler.assembly()
         profileViewController?.setupTabBar(title: "",
                                         imageName: "newspaper",
                                         tag: 0)
 
-        newsViewController = ProfileScreenController()
+        newsViewController = NewsScreenAsembler.assembly()
         newsViewController?.setupTabBar(title: "",
                                            imageName: "person",
                                            tag: 1)

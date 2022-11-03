@@ -16,6 +16,8 @@
 		A0B5D6922911C15300DD3C65 /* NewsScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D6912911C15300DD3C65 /* NewsScreenPresenter.swift */; };
 		A0B5D6982911C1F200DD3C65 /* ProfileScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D6972911C1F200DD3C65 /* ProfileScreenPresenter.swift */; };
 		A0B5D69A2911C20E00DD3C65 /* ProfileScreenAsembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D6992911C20E00DD3C65 /* ProfileScreenAsembler.swift */; };
+		A0B5D69E29142E7000DD3C65 /* FirstScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D69D29142E7000DD3C65 /* FirstScreenViewController.swift */; };
+		A0B5D6A029145E4700DD3C65 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D69F29145E4700DD3C65 /* LoginViewController.swift */; };
 		A0C33BC7290AE6040058DCE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C33BC6290AE6040058DCE0 /* AppDelegate.swift */; };
 		A0C33BC9290AE6040058DCE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C33BC8290AE6040058DCE0 /* SceneDelegate.swift */; };
 		A0C33BD0290AE6050058DCE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0C33BCF290AE6050058DCE0 /* Assets.xcassets */; };
@@ -32,6 +34,8 @@
 		A0B5D6912911C15300DD3C65 /* NewsScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsScreenPresenter.swift; sourceTree = "<group>"; };
 		A0B5D6972911C1F200DD3C65 /* ProfileScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenPresenter.swift; sourceTree = "<group>"; };
 		A0B5D6992911C20E00DD3C65 /* ProfileScreenAsembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenAsembler.swift; sourceTree = "<group>"; };
+		A0B5D69D29142E7000DD3C65 /* FirstScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScreenViewController.swift; sourceTree = "<group>"; };
+		A0B5D69F29145E4700DD3C65 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A0C33BC3290AE6040058DCE0 /* News_Radar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News_Radar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0C33BC6290AE6040058DCE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0C33BC8290AE6040058DCE0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,11 +95,13 @@
 			path = NewsScreen;
 			sourceTree = "<group>";
 		};
-		A0B5D68029117BB400DD3C65 /* LoginScreen */ = {
+		A0B5D68029117BB400DD3C65 /* StartScreen */ = {
 			isa = PBXGroup;
 			children = (
+				A0B5D69C29142E3400DD3C65 /* LoginScreen */,
+				A0B5D69B29142E1F00DD3C65 /* FirstScreen */,
 			);
-			path = LoginScreen;
+			path = StartScreen;
 			sourceTree = "<group>";
 		};
 		A0B5D68129117DC200DD3C65 /* Extensions */ = {
@@ -176,6 +182,22 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		A0B5D69B29142E1F00DD3C65 /* FirstScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A0B5D69D29142E7000DD3C65 /* FirstScreenViewController.swift */,
+			);
+			path = FirstScreen;
+			sourceTree = "<group>";
+		};
+		A0B5D69C29142E3400DD3C65 /* LoginScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A0B5D69F29145E4700DD3C65 /* LoginViewController.swift */,
+			);
+			path = LoginScreen;
+			sourceTree = "<group>";
+		};
 		A0C33BBA290AE6040058DCE0 = {
 			isa = PBXGroup;
 			children = (
@@ -234,7 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				A0B5D6882911BEDD00DD3C65 /* Enums */,
-				A0B5D68029117BB400DD3C65 /* LoginScreen */,
+				A0B5D68029117BB400DD3C65 /* StartScreen */,
 				A0B5D67F29117BA400DD3C65 /* NewsScreen */,
 				A0B5D67E29117B8800DD3C65 /* ProfileScreen */,
 				A0B5D67C29117B5500DD3C65 /* TabBar */,
@@ -319,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0B5D6982911C1F200DD3C65 /* ProfileScreenPresenter.swift in Sources */,
+				A0B5D69E29142E7000DD3C65 /* FirstScreenViewController.swift in Sources */,
 				A0C33BC7290AE6040058DCE0 /* AppDelegate.swift in Sources */,
 				A0B5D68329117E1000DD3C65 /* UIViewController + Exs.swift in Sources */,
 				A0B5D68A2911BF1A00DD3C65 /* Color.swift in Sources */,
@@ -328,6 +351,7 @@
 				A0B5D68C2911C0AC00DD3C65 /* NewsScreenAsembler.swift in Sources */,
 				A0C33BC9290AE6040058DCE0 /* SceneDelegate.swift in Sources */,
 				A0B5D6852911B8B600DD3C65 /* NewsScreenController.swift in Sources */,
+				A0B5D6A029145E4700DD3C65 /* LoginViewController.swift in Sources */,
 				A0B5D6872911B9A300DD3C65 /* ProfileScreenController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
