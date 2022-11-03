@@ -22,7 +22,7 @@ class FirstScreenViewController: UIViewController {
     private lazy var logoLabel: UILabel = {
         let label = UILabel()
         label.text = MetricText.logoLabel
-        let font = UIFont(name: MetricText.font,
+        let font = UIFont(name: Font.hiragino,
                           size:MetricText.logoLabelFontSize)
         label.font = font
         label.textColor = Color.black.color
@@ -32,7 +32,7 @@ class FirstScreenViewController: UIViewController {
     private lazy var mainCaptionLabel: UILabel = {
         let label = UILabel()
         label.text = MetricText.mainCaptionLabel
-        let font = UIFont(name: MetricText.font,
+        let font = UIFont(name: Font.hiragino,
                           size:MetricText.mainCaptionLabelFontSize)
         label.font = font
         label.textColor = Color.grey.color
@@ -42,7 +42,7 @@ class FirstScreenViewController: UIViewController {
     private lazy var bottomLabel: UILabel = {
         let label = UILabel()
         label.text = MetricText.bottomLabel
-        let font = UIFont(name: MetricText.font,
+        let font = UIFont(name: Font.hiragino,
                           size:MetricText.bottomLabelFontSize)
         label.font = font
         label.textColor = Color.grey.color
@@ -53,7 +53,7 @@ class FirstScreenViewController: UIViewController {
         let button = UIButton()
         button.setTitle(MetricText.openButton, for: .normal)
         button.layer.cornerRadius = 6
-        let font = UIFont(name: MetricText.font,
+        let font = UIFont(name: Font.hiragino,
                           size: 20)
         button.titleLabel?.font = font
         button.setTitleColor(Color.yellow.color, for: .normal)
@@ -66,12 +66,16 @@ class FirstScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Color.blue.color
+        setupView()
         setupHierarchy()
         setupLoyaut()
     }
     
     // MARK: - Private functions
+    
+    private func setupView() {
+        view.backgroundColor = Color.blue.color
+    }
     
     private func setupHierarchy() {
         view.addSubview(newsImageView)
@@ -132,7 +136,6 @@ class FirstScreenViewController: UIViewController {
     enum MetricText {
         static var newsImageView = "cubes-letters"
         static var logoLabel = "RADAR"
-        static var font = "Hiragino Sans W6"
         static var logoLabelFontSize: CGFloat = 60
         static var mainCaptionLabel = "only fresh"
         static var mainCaptionLabelFontSize: CGFloat = 20
