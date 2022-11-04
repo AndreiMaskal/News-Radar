@@ -27,7 +27,7 @@ enum Color {
         case .purpl:
             return #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
         case .red:
-            return #colorLiteral(red: 0.8711125851, green: 0.3173463345, blue: 0.3299358189, alpha: 1)
+            return #colorLiteral(red: 0.6666666865, green: 0.1628500727, blue: 0.2998337174, alpha: 1)
         case .grey:
             return #colorLiteral(red: 0.5490196347, green: 0.5490196347, blue: 0.5490196347, alpha: 1)
         case .white:

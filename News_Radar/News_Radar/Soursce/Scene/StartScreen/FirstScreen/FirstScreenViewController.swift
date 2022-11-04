@@ -52,7 +52,7 @@ class FirstScreenViewController: UIViewController {
     private lazy var openButton: UIButton = {
         let button = UIButton()
         button.setTitle(MetricText.openButton, for: .normal)
-        button.layer.cornerRadius = 6
+        button.layer.cornerRadius = Corners.radiusButton
         let font = UIFont(name: Font.hiragino,
                           size: 20)
         button.titleLabel?.font = font
@@ -118,7 +118,8 @@ class FirstScreenViewController: UIViewController {
     // MARK: - Actions
     
     @objc func setScreenLogin() {
-        navigationController?.pushViewController(LoginViewController(), animated: true)
+        navigationController?.pushViewController(LoginViewController(secureTextMode: true), animated: true)
+        navigationController?.navigationBar.tintColor = Color.grey.color
     }
     
     // MARK: - Metrics
