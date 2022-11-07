@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A03B267E29198B19005BC898 /* String + Exs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B267D29198B19005BC898 /* String + Exs.swift */; };
 		A0B5D67B29116A8200DD3C65 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A0B5D67A29116A8200DD3C65 /* SnapKit */; };
 		A0B5D68329117E1000DD3C65 /* UIViewController + Exs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D68229117E1000DD3C65 /* UIViewController + Exs.swift */; };
 		A0B5D6852911B8B600DD3C65 /* NewsScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D6842911B8B600DD3C65 /* NewsScreenController.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A03B267D29198B19005BC898 /* String + Exs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Exs.swift"; sourceTree = "<group>"; };
 		A0B5D68229117E1000DD3C65 /* UIViewController + Exs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Exs.swift"; sourceTree = "<group>"; };
 		A0B5D6842911B8B600DD3C65 /* NewsScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsScreenController.swift; sourceTree = "<group>"; };
 		A0B5D6862911B9A300DD3C65 /* ProfileScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				A0B5D68229117E1000DD3C65 /* UIViewController + Exs.swift */,
+				A03B267D29198B19005BC898 /* String + Exs.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				A0B5D6852911B8B600DD3C65 /* NewsScreenController.swift in Sources */,
 				A0B5D6A029145E4700DD3C65 /* LoginViewController.swift in Sources */,
 				A0B5D6A429158EE700DD3C65 /* Corners.swift in Sources */,
+				A03B267E29198B19005BC898 /* String + Exs.swift in Sources */,
 				A0B5D6872911B9A300DD3C65 /* ProfileScreenController.swift in Sources */,
 				A0B5D6A72916B1D600DD3C65 /* CreateProfileScreenController.swift in Sources */,
 			);

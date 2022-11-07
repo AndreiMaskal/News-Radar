@@ -12,7 +12,6 @@ class LoginViewController: UIViewController {
     // MARK: - Elements
     
     private let widhtPassword = Metric.widhtPassword
-//    private lazy var regex = "^?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*])[A-Zz-a\\d$@$!%*]{\(widhtPassword),}$"
         
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
