@@ -15,6 +15,7 @@ enum Color {
     case grey
     case white
     case yellow
+    case green
     
     
     var color: UIColor {
@@ -34,6 +35,8 @@ enum Color {
             return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         case .yellow:
             return #colorLiteral(red: 0.9010485411, green: 0.78630656, blue: 0.6651161313, alpha: 1)
+        case .green:
+            return #colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)
         }
     }
 }

@@ -62,6 +62,18 @@ class FirstScreenViewController: UIViewController {
         return button
     }()
     
+    private lazy var createAccountButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(MetricText.createAccountButton, for: .normal)
+        let font = UIFont(name: Font.hiragino,
+                          size: 15)
+        button.titleLabel?.font = font
+        button.setTitleColor(Color.black.color, for: .normal)
+        button.addTarget(self, action: #selector(setScreenCreate), for: .touchUpInside)
+        
+        return button
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -83,10 +95,11 @@ class FirstScreenViewController: UIViewController {
         view.addSubview(mainCaptionLabel)
         view.addSubview(openButton)
         view.addSubview(bottomLabel)
+        view.addSubview(createAccountButton)
     }
     
     private func setupLoyaut() {
-    
+        
         newsImageView.snp.makeConstraints { make in
             make.width.equalTo(Metric.newsImageViewSize)
             make.centerX.equalTo(view.snp.centerX)
@@ -97,12 +110,12 @@ class FirstScreenViewController: UIViewController {
             make.centerY.equalTo(newsImageView.snp.centerY).offset(Metric.mainNameLabelTop)
             make.centerX.equalTo(view.snp.centerX)
         }
-
+        
         mainCaptionLabel.snp.makeConstraints { make in
             make.top.equalTo(logoLabel.snp.bottom).offset(Metric.mainCaptionLabelTop)
             make.centerX.equalTo(view.snp.centerX)
         }
-
+        
         openButton.snp.makeConstraints { make in
             make.top.equalTo(mainCaptionLabel.snp.bottom).offset(Metric.openButtonTop)
             make.width.equalTo(Metric.openButtonWight)
@@ -113,12 +126,22 @@ class FirstScreenViewController: UIViewController {
             make.bottom.equalTo(view.snp.bottom).offset(Metric.bottomLabelBottom)
             make.centerX.equalTo(view.snp.centerX)
         }
+        
+        createAccountButton.snp.makeConstraints { make in
+            make.top.equalTo(openButton.snp.bottom).offset(Metric.createAccountButtonTop)
+            make.centerX.equalTo(view.snp.centerX)
+        }
     }
     
     // MARK: - Actions
     
     @objc func setScreenLogin() {
-        navigationController?.pushViewController(LoginViewController(secureTextMode: true), animated: true)
+        navigationController?.pushViewController(LoginViewController(), animated: true)
+        navigationController?.navigationBar.tintColor = Color.grey.color
+    }
+    
+    @objc func setScreenCreate() {
+        navigationController?.pushViewController(CreateProfileScreenController(), animated: true)
         navigationController?.navigationBar.tintColor = Color.grey.color
     }
     
@@ -130,7 +153,8 @@ class FirstScreenViewController: UIViewController {
         static var mainNameLabelTop: CGFloat = 120
         static var mainCaptionLabelTop: CGFloat = 30
         static var openButtonTop: CGFloat = 130
-        static var openButtonWight: CGFloat = 100
+        static var createAccountButtonTop: CGFloat = 20
+        static var openButtonWight: CGFloat = 150
         static var bottomLabelBottom: CGFloat = -20
     }
     
@@ -140,7 +164,8 @@ class FirstScreenViewController: UIViewController {
         static var logoLabelFontSize: CGFloat = 60
         static var mainCaptionLabel = "only fresh"
         static var mainCaptionLabelFontSize: CGFloat = 20
-        static var openButton = "OPEN"
+        static var openButton = "MY PROFILE"
+        static var createAccountButton = "Create profile?"
         static var bottomLabel = "2022"
         static var bottomLabelFontSize: CGFloat = 10
     }
