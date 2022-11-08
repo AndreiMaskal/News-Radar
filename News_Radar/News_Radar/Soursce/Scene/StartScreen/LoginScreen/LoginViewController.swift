@@ -6,13 +6,17 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
     
     // MARK: - Elements
     
-    private let widhtPassword = Metric.widhtPassword
-        
+    private let minWidhtPassword = Metric.minWidhtPassword
+    private let maxWidhtPassword = Metric.maxWidhtPassword
+    
+    private lazy var regex = "^?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*])[A-Zz-a\\d$@$!%*]{}$"
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         let font = UIFont(name: Font.hiragino,
@@ -47,12 +51,12 @@ class LoginViewController: UIViewController {
         textField.layer.borderColor = color.cgColor
         textField.layer.masksToBounds = true
         textField.layer.cornerRadius = Corners.radiusButton
+        textField.returnKeyType = .done
         return textField
     }()
     
-    private lazy var loginButton: UIButton = {
+    private lazy var openButton: UIButton = {
         let button = UIButton()
-        button.setTitle(MetricText.loginTextField, for: .normal)
         button.layer.cornerRadius = Corners.radiusButton
         let font = UIFont(name: Font.hiragino,
                           size: MetricText.loginButtonFontSize)
@@ -77,8 +81,16 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    private lazy var messageLabel: UILabel = {
+        let label = UILabel()
+        let font = UIFont(name: Font.hiragino,
+                          size: MetricText.messageLabelFontSize)
+        label.font = font
+        return label
+    }()
+    
     // MARK: - Lifecycle
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -97,8 +109,9 @@ class LoginViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(loginTextField)
         view.addSubview(passwordTextField)
-        view.addSubview(loginButton)
+        view.addSubview(openButton)
         view.addSubview(textEntryModeSwitchButton)
+        view.addSubview(messageLabel)
     }
     
     private func setupLoyaut() {
@@ -122,7 +135,7 @@ class LoginViewController: UIViewController {
             make.height.equalTo(Metric.textFieldHeight)
         }
         
-        loginButton.snp.makeConstraints { make in
+        openButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(passwordTextField.snp.bottom).offset(Metric.loginButtonTop)
             make.width.equalTo(Metric.loginButtonWidth)
@@ -134,14 +147,19 @@ class LoginViewController: UIViewController {
             make.centerY.equalTo(passwordTextField.snp.centerY)
         }
         
+        messageLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(passwordTextField.snp.bottom).offset(Metric.messageLabelTop)
+        }
+        
     }
     
     // MARK: - Actions
     
     @objc func actionLogin() {
+        
         navigationController?.pushViewController(MainTabBarController(), animated: true)
         navigationController?.isNavigationBarHidden = true
-        
     }
     
     @objc func secureEntryModeSwitcher() {
@@ -155,10 +173,30 @@ class LoginViewController: UIViewController {
         }
     }
     
+    private func checkValidation(password: String) {
+        guard password.count + 1 >= minWidhtPassword else {
+            messageLabel.textColor = Color.red.color
+            messageLabel.text = MetricText.negativMessageLabel
+            return
+        }
+        
+        if !password.matches(regex) {
+            messageLabel.textColor = Color.green.color
+            messageLabel.text = MetricText.positivMessageLabel
+        }
+    }
+    
+    private func showAllert() {
+        let alert = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alert, animated: true)
+    }
+    
     // MARK: - Metrics
     
     enum Metric {
-        static var widhtPassword = 6
+        static var minWidhtPassword = 6
+        static var maxWidhtPassword = 10
         static var titleLabelLeading: CGFloat = 30
         static var titleLabelTop: CGFloat = 130
         static var textFieldTop: CGFloat = 20
@@ -167,29 +205,61 @@ class LoginViewController: UIViewController {
         static var textFieldWidth: CGFloat = UIScreen.main.bounds.width / 1.2
         static var textFieldHeight: CGFloat = textFieldWidth / 8
         static var loginButtonWidth: CGFloat = UIScreen.main.bounds.width / 3
+        static var messageLabelTop: CGFloat = 20
     }
     
     enum MetricText {
         static var titleLabel = "GO TO..."
+        static var createTitleLabel = "Create your account"
+        static var createTitleButton = "Create?"
+        static var loginTitleButton = "Login"
         static var titleLabelFontSize: CGFloat = 30
         static var loginButtonFontSize: CGFloat = 25
-        static var loginTextField = "Login"
+        static var loginTextField = "Email"
         static var passwordTextField = "Password"
+        static var negativMessageLabel = "Please min. \(Metric.minWidhtPassword) max. \(Metric.maxWidhtPassword) characters"
+        static var positivMessageLabel = "Correct"
+        static var messageLabelFontSize: CGFloat = 12
     }
 }
 
 extension LoginViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let textFieldText = textField.text,
-              let rangeOfTextToReplace = Range(range, in: textFieldText) else {
-            return false
+        guard  let text = textField.text,
+               let rangeOfTextToReplace = Range(range, in: text) else { return false }
+        let res: String
+        if range.length == 1 {
+            let end = text.index(text.startIndex, offsetBy: text.count - 1)
+            res = String(text[text.startIndex...end])
+        } else {
+            res = text
         }
-        
-        let subsStringToReplace = textFieldText[rangeOfTextToReplace]
-        let count = textFieldText.count - subsStringToReplace.count + string.count
-        return count <= widhtPassword
-        }
+        checkValidation(password: res)
+        textField.text = res
+        let subsStringToReplace = text[rangeOfTextToReplace]
+        let count = text.count - subsStringToReplace.count + string.count
+        return count <= maxWidhtPassword
     }
-
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        let login = loginTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        
+        if (!login.isEmpty && !password.isEmpty) {
+            Auth.auth().createUser(withEmail: login, password: password) { (result, error) in
+                if error == nil {
+                    if let result = result {
+                        print(result.user.uid)
+                    }
+                }
+            }
+            
+        } else {
+            showAllert()
+        }
+        return true
+    }
+}
 

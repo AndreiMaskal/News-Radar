@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Firebase
 
 class FirstScreenViewController: UIViewController {
     
@@ -62,18 +63,6 @@ class FirstScreenViewController: UIViewController {
         return button
     }()
     
-    private lazy var createAccountButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(MetricText.createAccountButton, for: .normal)
-        let font = UIFont(name: Font.hiragino,
-                          size: 15)
-        button.titleLabel?.font = font
-        button.setTitleColor(Color.black.color, for: .normal)
-        button.addTarget(self, action: #selector(setScreenCreate), for: .touchUpInside)
-        
-        return button
-    }()
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -95,7 +84,6 @@ class FirstScreenViewController: UIViewController {
         view.addSubview(mainCaptionLabel)
         view.addSubview(openButton)
         view.addSubview(bottomLabel)
-        view.addSubview(createAccountButton)
     }
     
     private func setupLoyaut() {
@@ -126,25 +114,29 @@ class FirstScreenViewController: UIViewController {
             make.bottom.equalTo(view.snp.bottom).offset(Metric.bottomLabelBottom)
             make.centerX.equalTo(view.snp.centerX)
         }
-        
-        createAccountButton.snp.makeConstraints { make in
-            make.top.equalTo(openButton.snp.bottom).offset(Metric.createAccountButtonTop)
-            make.centerX.equalTo(view.snp.centerX)
-        }
     }
     
     // MARK: - Actions
     
+//    @objc func setScreenLogin() {
+//
+//        Auth.auth().addStateDidChangeListener { auth, user in
+//            if user == nil {
+//                self.navigationController?.pushViewController(LoginViewController(), animated: true)
+//                self.navigationController?.navigationBar.tintColor = Color.grey.color
+//            } else {
+//                self.navigationController?.pushViewController(MainTabBarController(), animated: true)
+//                self.navigationController?.isNavigationBarHidden = true
+//            }
+//        }
+//    }
+    
     @objc func setScreenLogin() {
-        navigationController?.pushViewController(LoginViewController(), animated: true)
-        navigationController?.navigationBar.tintColor = Color.grey.color
-    }
     
-    @objc func setScreenCreate() {
-        navigationController?.pushViewController(CreateProfileScreenController(), animated: true)
-        navigationController?.navigationBar.tintColor = Color.grey.color
+        self.navigationController?.pushViewController(LoginViewController(), animated: true)
+        self.navigationController?.navigationBar.tintColor = Color.grey.color
     }
-    
+        
     // MARK: - Metrics
     
     enum Metric {
@@ -164,8 +156,7 @@ class FirstScreenViewController: UIViewController {
         static var logoLabelFontSize: CGFloat = 60
         static var mainCaptionLabel = "only fresh"
         static var mainCaptionLabelFontSize: CGFloat = 20
-        static var openButton = "MY PROFILE"
-        static var createAccountButton = "Create profile?"
+        static var openButton = "Continue"
         static var bottomLabel = "2022"
         static var bottomLabelFontSize: CGFloat = 10
     }
