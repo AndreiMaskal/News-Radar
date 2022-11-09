@@ -118,25 +118,19 @@ class FirstScreenViewController: UIViewController {
     
     // MARK: - Actions
     
-//    @objc func setScreenLogin() {
-//
-//        Auth.auth().addStateDidChangeListener { auth, user in
-//            if user == nil {
-//                self.navigationController?.pushViewController(LoginViewController(), animated: true)
-//                self.navigationController?.navigationBar.tintColor = Color.grey.color
-//            } else {
-//                self.navigationController?.pushViewController(MainTabBarController(), animated: true)
-//                self.navigationController?.isNavigationBarHidden = true
-//            }
-//        }
-//    }
-    
     @objc func setScreenLogin() {
-    
-        self.navigationController?.pushViewController(LoginViewController(), animated: true)
-        self.navigationController?.navigationBar.tintColor = Color.grey.color
+
+        Auth.auth().addStateDidChangeListener { auth, user in
+            if user == nil {
+                self.navigationController?.pushViewController(LoginViewController(), animated: true)
+                self.navigationController?.navigationBar.tintColor = Color.grey.color
+            } else {
+                self.navigationController?.pushViewController(MainTabBarController(), animated: true)
+                self.navigationController?.isNavigationBarHidden = true
+            }
+        }
     }
-        
+
     // MARK: - Metrics
     
     enum Metric {

@@ -28,8 +28,8 @@ class MainTabBarController: UITabBarController {
         setupViewControllers()
 
         let viewControllers = [
-            profileViewController,
             newsViewController,
+            profileViewController,
         ]
 
         self.viewControllers = viewControllers.map {
@@ -47,12 +47,13 @@ class MainTabBarController: UITabBarController {
     private func setupViewControllers() {
         profileViewController = ProfileScreenAsembler.assembly()
         profileViewController?.setupTabBar(title: "",
-                                        imageName: "newspaper",
+                                        imageName: "person",
                                         tag: 0)
 
         newsViewController = NewsScreenAsembler.assembly()
         newsViewController?.setupTabBar(title: "",
-                                           imageName: "person",
+                                           imageName:
+                                        "newspaper",
                                            tag: 1)
     }
 

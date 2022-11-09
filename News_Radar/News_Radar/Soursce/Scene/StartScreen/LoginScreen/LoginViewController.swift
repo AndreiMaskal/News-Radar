@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
         let font = UIFont(name: Font.hiragino,
                           size:MetricText.titleLabelFontSize)
         label.font = font
-        label.text = MetricText.titleLabel
+        label.text = MetricText.createTitleLabel
         label.textColor = Color.black.color
         return label
     }()
@@ -61,10 +61,21 @@ class LoginViewController: UIViewController {
         let font = UIFont(name: Font.hiragino,
                           size: MetricText.loginButtonFontSize)
         button.titleLabel?.font = font
+        button.setTitle(MetricText.createTitleButton, for: .normal)
         button.setTitleColor(Color.yellow.color, for: .normal)
-        
         button.addTarget(self, action: #selector(actionLogin), for: .touchUpInside)
         button.backgroundColor = Color.grey.color
+        return button
+    }()
+    
+    private lazy var changeButton: UIButton = {
+        let button = UIButton()
+        let font = UIFont(name: Font.hiragino,
+                          size: 15)
+        button.titleLabel?.font = font
+        button.setTitleColor(Color.black.color, for: .normal)
+        button.setTitle(MetricText.changeLoginTitleButton, for: .normal)
+        button.addTarget(self, action: #selector(changeTitleButton), for: .touchUpInside)
         return button
     }()
     
@@ -72,7 +83,7 @@ class LoginViewController: UIViewController {
         let button = UIButton()
         let imageNormal = UIImage(systemName: "eye.slash")
         let imageSelect = UIImage(systemName: "eye")
-        button.tintColor = Color.yellow.color
+        button.tintColor = Color.grey.color
         button.setImage(imageNormal, for: .normal)
         button.setImage(imageSelect, for: .selected)
         button.addTarget(self,
@@ -88,6 +99,26 @@ class LoginViewController: UIViewController {
         label.font = font
         return label
     }()
+    
+    private var switchUp: Bool = true {
+        willSet {
+            if newValue {
+                titleLabel.text = MetricText.createTitleLabel
+                passwordTextField.text = ""
+                loginTextField.text = ""
+                messageLabel.text = ""
+                openButton.setTitle(MetricText.createTitleButton, for: .normal)
+                changeButton.setTitle(MetricText.changeLoginTitleButton, for: .normal)
+            } else {
+                passwordTextField.text = ""
+                loginTextField.text = ""
+                messageLabel.text = ""
+                openButton.setTitle(MetricText.loginTitleButton, for: .normal)
+                titleLabel.text = MetricText.titleLabel
+                changeButton.setTitle(MetricText.changeCreateTitButton, for: .normal)
+            }
+        }
+    }
     
     // MARK: - Lifecycle
     
@@ -112,6 +143,7 @@ class LoginViewController: UIViewController {
         view.addSubview(openButton)
         view.addSubview(textEntryModeSwitchButton)
         view.addSubview(messageLabel)
+        view.addSubview(changeButton)
     }
     
     private func setupLoyaut() {
@@ -152,14 +184,47 @@ class LoginViewController: UIViewController {
             make.top.equalTo(passwordTextField.snp.bottom).offset(Metric.messageLabelTop)
         }
         
+        changeButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(openButton.snp.bottom).offset(20)
+        }
     }
     
     // MARK: - Actions
     
     @objc func actionLogin() {
-        
-        navigationController?.pushViewController(MainTabBarController(), animated: true)
-        navigationController?.isNavigationBarHidden = true
+        let email = loginTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        if(switchUp) {
+            if (!email.isEmpty && !password.isEmpty) {
+                Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+                    if error == nil {
+                        if let result = result {
+                            print(result.user.uid)
+                            let base = Database.database().reference().child("users")
+                            base.child(result.user.uid).updateChildValues(["email" : email])
+                        }
+                    }
+                }
+            } else {
+                showAlert()
+            }
+        } else {
+            if (!email.isEmpty && !password.isEmpty) {
+                Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+                    if error == nil {
+                    } else {
+                        self.errorAlert()
+                    }
+                }
+            } else {
+                showAlert()
+            }
+        }
+    }
+    
+    @objc func changeTitleButton() {
+        switchUp = !switchUp
     }
     
     @objc func secureEntryModeSwitcher() {
@@ -186,8 +251,14 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func showAllert() {
-        let alert = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
+    private func showAlert() {
+        let alert = UIAlertController(title: "Error", message: "All fields should be filled", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alert, animated: true)
+    }
+    
+    private func errorAlert() {
+        let alert = UIAlertController(title: "Error", message: "There is no such user", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default))
         present(alert, animated: true)
     }
@@ -211,7 +282,9 @@ class LoginViewController: UIViewController {
     enum MetricText {
         static var titleLabel = "GO TO..."
         static var createTitleLabel = "Create your account"
-        static var createTitleButton = "Create?"
+        static var createTitleButton = "Create"
+        static var changeCreateTitButton = "Registration?"
+        static var changeLoginTitleButton = "I have profile"
         static var loginTitleButton = "Login"
         static var titleLabelFontSize: CGFloat = 30
         static var loginButtonFontSize: CGFloat = 25
@@ -243,22 +316,7 @@ extension LoginViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        let login = loginTextField.text ?? ""
-        let password = passwordTextField.text ?? ""
-        
-        if (!login.isEmpty && !password.isEmpty) {
-            Auth.auth().createUser(withEmail: login, password: password) { (result, error) in
-                if error == nil {
-                    if let result = result {
-                        print(result.user.uid)
-                    }
-                }
-            }
-            
-        } else {
-            showAllert()
-        }
+        actionLogin()
         return true
     }
 }
