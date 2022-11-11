@@ -33,7 +33,7 @@ class LoginViewController: UIViewController {
         let font = UIFont(name: Font.hiragino,
                           size:MetricText.titleLabelFontSize)
         label.font = font
-        label.text = MetricText.createTitleLabel
+        label.text = MetricText.titleLabel
         label.textColor = Color.black.color
         return label
     }()
@@ -93,7 +93,7 @@ class LoginViewController: UIViewController {
         let font = UIFont(name: Font.hiragino,
                           size: MetricText.loginButtonFontSize)
         button.titleLabel?.font = font
-        button.setTitle(MetricText.createTitleButton, for: .normal)
+        button.setTitle(MetricText.loginTitleButton, for: .normal)
         button.setTitleColor(Color.yellow.color, for: .normal)
         button.addTarget(self, action: #selector(actionLogin), for: .touchUpInside)
         button.backgroundColor = Color.grey.color
@@ -106,7 +106,7 @@ class LoginViewController: UIViewController {
                           size: 15)
         button.titleLabel?.font = font
         button.setTitleColor(Color.black.color, for: .normal)
-        button.setTitle(MetricText.changeLoginTitleButton, for: .normal)
+        button.setTitle(MetricText.changeCreateTitButton, for: .normal)
         button.addTarget(self, action: #selector(changeTitleButton), for: .touchUpInside)
         return button
     }()
@@ -132,7 +132,7 @@ class LoginViewController: UIViewController {
         return label
     }()
     
-    private var switchUp: Bool = true {
+    private var switchUp: Bool = false {
         willSet {
             if newValue {
                 titleLabel.text = MetricText.createTitleLabel
