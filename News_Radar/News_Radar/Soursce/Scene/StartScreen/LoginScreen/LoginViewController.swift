@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Firebase
 
 class LoginViewController: UIViewController {
     
@@ -17,6 +16,18 @@ class LoginViewController: UIViewController {
     
     private lazy var regex = "^?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*])[A-Zz-a\\d$@$!%*]{}$"
     
+    private lazy var newsImageView:  UIImageView = {
+        let imageView = UIImageView(frame: .infinite)
+        let image = UIImage(named: MetricText.newsImageView)
+        imageView.image = image
+        return imageView
+    }()
+    
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView(frame: view.bounds)
+        return scrollView
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         let font = UIFont(name: Font.hiragino,
@@ -24,6 +35,26 @@ class LoginViewController: UIViewController {
         label.font = font
         label.text = MetricText.createTitleLabel
         label.textColor = Color.black.color
+        return label
+    }()
+    
+    private lazy var logoLabel: UILabel = {
+        let label = UILabel()
+        label.text = MetricText.logoLabel
+        let font = UIFont(name: Font.hiragino,
+                          size:MetricText.logoLabelFontSize)
+        label.font = font
+        label.textColor = Color.black.color
+        return label
+    }()
+    
+    private lazy var mainCaptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = MetricText.mainCaptionLabel
+        let font = UIFont(name: Font.hiragino,
+                          size:MetricText.mainCaptionLabelFontSize)
+        label.font = font
+        label.textColor = Color.grey.color
         return label
     }()
     
@@ -52,6 +83,7 @@ class LoginViewController: UIViewController {
         textField.layer.masksToBounds = true
         textField.layer.cornerRadius = Corners.radiusButton
         textField.returnKeyType = .done
+        textField.delegate = self
         return textField
     }()
     
@@ -124,33 +156,63 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerForKeyboardNotification()
         setupView()
         setupHierarchy()
         setupLoyaut()
-        passwordTextField.delegate = self
     }
     
     // MARK: - Private functions
     
     private func setupView() {
         view.backgroundColor = Color.blue.color
+        navigationController?.navigationBar.isHidden = true
     }
     
     private func setupHierarchy() {
-        view.addSubview(titleLabel)
-        view.addSubview(loginTextField)
-        view.addSubview(passwordTextField)
-        view.addSubview(openButton)
-        view.addSubview(textEntryModeSwitchButton)
-        view.addSubview(messageLabel)
-        view.addSubview(changeButton)
+        
+        view.addSubview(scrollView)
+        scrollView.addSubview(newsImageView)
+        newsImageView.addSubview(logoLabel)
+        scrollView.addSubview(mainCaptionLabel)
+        scrollView.addSubview(titleLabel)
+        scrollView.addSubview(loginTextField)
+        scrollView.addSubview(passwordTextField)
+        scrollView.addSubview(openButton)
+        scrollView.addSubview(textEntryModeSwitchButton)
+        scrollView.addSubview(messageLabel)
+        scrollView.addSubview(changeButton)
+        
     }
     
     private func setupLoyaut() {
         
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(-50)
+            make.bottom.leading.trailing.equalTo(0)
+        }
+             
+        newsImageView.snp.makeConstraints { make in
+            newsImageView.snp.makeConstraints { make in
+                make.width.equalTo(Metric.newsImageViewSize)
+                make.centerX.equalTo(view.snp.centerX)
+                make.top.equalTo(scrollView.snp.top).offset(Metric.newsImageViewTop)
+            }
+        }
+        
+        logoLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(newsImageView.snp.centerY).offset(Metric.mainNameLabelTop)
+            make.centerX.equalTo(view.snp.centerX)
+        }
+        
+        mainCaptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(logoLabel.snp.bottom).offset(Metric.mainCaptionLabelTop)
+            make.centerX.equalTo(view.snp.centerX)
+        }
+        
         titleLabel.snp.makeConstraints { make in
             make.leading.equalTo(Metric.titleLabelLeading)
-            make.top.equalTo(Metric.titleLabelTop)
+            make.top.equalTo(newsImageView.snp.bottom).offset(Metric.titleLabelTop) 
         }
         
         loginTextField.snp.makeConstraints { make in
@@ -192,33 +254,43 @@ class LoginViewController: UIViewController {
     
     // MARK: - Actions
     
+    func registerForKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(kbWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(kbWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func kbWillShow(_ notification: Notification) {
+        let userInfo = notification.userInfo
+        let kbFrameSize = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        scrollView.contentOffset = CGPoint(x: 0, y: kbFrameSize.height - 50)
+    }
+    
+    @objc func kbWillHide() {
+       scrollView.contentOffset = CGPoint(x: 0, y: -50)
+        
+    }
+    
     @objc func actionLogin() {
         let email = loginTextField.text ?? ""
         let password = passwordTextField.text ?? ""
         if(switchUp) {
             if (!email.isEmpty && !password.isEmpty) {
-                Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-                    if error == nil {
-                        if let result = result {
-                            print(result.user.uid)
-                            let base = Database.database().reference().child("users")
-                            base.child(result.user.uid).updateChildValues(["email" : email])
-                        }
-                    }
-                }
+                FireBaseServices().createUser(email: email, password: password)
             } else {
-                showAlert()
+                showAlert(message: MetricText.messageErrorFields)
             }
         } else {
             if (!email.isEmpty && !password.isEmpty) {
-                Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-                    if error == nil {
-                    } else {
-                        self.errorAlert()
+                FireBaseServices().signIn(email: email, password: password) { [weak self] result in
+                    switch result {
+                    case .success: break
+                    case .failure(let error):
+                        self?.showAlert(message: error.localizedDescription)
                     }
                 }
             } else {
-                showAlert()
+                showAlert(message: MetricText.messageErrorFields)
             }
         }
     }
@@ -251,14 +323,8 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func showAlert() {
-        let alert = UIAlertController(title: "Error", message: "All fields should be filled", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default))
-        present(alert, animated: true)
-    }
-    
-    private func errorAlert() {
-        let alert = UIAlertController(title: "Error", message: "There is no such user", preferredStyle: .alert)
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default))
         present(alert, animated: true)
     }
@@ -266,6 +332,10 @@ class LoginViewController: UIViewController {
     // MARK: - Metrics
     
     enum Metric {
+        static var newsImageViewSize: CGFloat = UIScreen.main.bounds.width / 1.3
+        static var newsImageViewTop: CGFloat = 100
+        static var mainNameLabelTop: CGFloat = 120
+        static var mainCaptionLabelTop: CGFloat = 30
         static var minWidhtPassword = 6
         static var maxWidhtPassword = 10
         static var titleLabelLeading: CGFloat = 30
@@ -280,7 +350,8 @@ class LoginViewController: UIViewController {
     }
     
     enum MetricText {
-        static var titleLabel = "GO TO..."
+        static var newsImageView = "depositphotos2"
+        static var titleLabel = "Sign in"
         static var createTitleLabel = "Create your account"
         static var createTitleButton = "Create"
         static var changeCreateTitButton = "Registration?"
@@ -293,6 +364,11 @@ class LoginViewController: UIViewController {
         static var negativMessageLabel = "Please min. \(Metric.minWidhtPassword) max. \(Metric.maxWidhtPassword) characters"
         static var positivMessageLabel = "Correct"
         static var messageLabelFontSize: CGFloat = 12
+        static var messageErrorFields = "All fields should be filled"
+        static var logoLabel = "RADAR"
+        static var logoLabelFontSize: CGFloat = 60
+        static var mainCaptionLabel = "only fresh"
+        static var mainCaptionLabelFontSize: CGFloat = 20
     }
 }
 

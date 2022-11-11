@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A01CAA75291ED17300CF868B /* KeyboardPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01CAA74291ED17300CF868B /* KeyboardPresentViewController.swift */; };
 		A03B267E29198B19005BC898 /* String + Exs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B267D29198B19005BC898 /* String + Exs.swift */; };
 		A03B2680291AE145005BC898 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A03B267F291AE145005BC898 /* GoogleService-Info.plist */; };
 		A03B2683291AE255005BC898 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A03B2682291AE255005BC898 /* FirebaseAnalytics */; };
@@ -23,7 +24,6 @@
 		A0B5D6922911C15300DD3C65 /* NewsScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D6912911C15300DD3C65 /* NewsScreenPresenter.swift */; };
 		A0B5D6982911C1F200DD3C65 /* ProfileScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D6972911C1F200DD3C65 /* ProfileScreenPresenter.swift */; };
 		A0B5D69A2911C20E00DD3C65 /* ProfileScreenAsembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D6992911C20E00DD3C65 /* ProfileScreenAsembler.swift */; };
-		A0B5D69E29142E7000DD3C65 /* FirstScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D69D29142E7000DD3C65 /* FirstScreenViewController.swift */; };
 		A0B5D6A029145E4700DD3C65 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D69F29145E4700DD3C65 /* LoginViewController.swift */; };
 		A0B5D6A22914642700DD3C65 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D6A12914642700DD3C65 /* Font.swift */; };
 		A0B5D6A429158EE700DD3C65 /* Corners.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D6A329158EE700DD3C65 /* Corners.swift */; };
@@ -35,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A01CAA74291ED17300CF868B /* KeyboardPresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardPresentViewController.swift; sourceTree = "<group>"; };
 		A03B267D29198B19005BC898 /* String + Exs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Exs.swift"; sourceTree = "<group>"; };
 		A03B267F291AE145005BC898 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A03B268B291AE633005BC898 /* FireBaseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseServices.swift; sourceTree = "<group>"; };
@@ -46,7 +47,6 @@
 		A0B5D6912911C15300DD3C65 /* NewsScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsScreenPresenter.swift; sourceTree = "<group>"; };
 		A0B5D6972911C1F200DD3C65 /* ProfileScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenPresenter.swift; sourceTree = "<group>"; };
 		A0B5D6992911C20E00DD3C65 /* ProfileScreenAsembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenAsembler.swift; sourceTree = "<group>"; };
-		A0B5D69D29142E7000DD3C65 /* FirstScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScreenViewController.swift; sourceTree = "<group>"; };
 		A0B5D69F29145E4700DD3C65 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A0B5D6A12914642700DD3C65 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		A0B5D6A329158EE700DD3C65 /* Corners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Corners.swift; sourceTree = "<group>"; };
@@ -125,7 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				A0B5D69C29142E3400DD3C65 /* LoginScreen */,
-				A0B5D69B29142E1F00DD3C65 /* FirstScreen */,
 			);
 			path = StartScreen;
 			sourceTree = "<group>";
@@ -211,18 +210,11 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		A0B5D69B29142E1F00DD3C65 /* FirstScreen */ = {
-			isa = PBXGroup;
-			children = (
-				A0B5D69D29142E7000DD3C65 /* FirstScreenViewController.swift */,
-			);
-			path = FirstScreen;
-			sourceTree = "<group>";
-		};
 		A0B5D69C29142E3400DD3C65 /* LoginScreen */ = {
 			isa = PBXGroup;
 			children = (
 				A0B5D69F29145E4700DD3C65 /* LoginViewController.swift */,
+				A01CAA74291ED17300CF868B /* KeyboardPresentViewController.swift */,
 			);
 			path = LoginScreen;
 			sourceTree = "<group>";
@@ -378,7 +370,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0B5D6982911C1F200DD3C65 /* ProfileScreenPresenter.swift in Sources */,
-				A0B5D69E29142E7000DD3C65 /* FirstScreenViewController.swift in Sources */,
 				A0B5D6A22914642700DD3C65 /* Font.swift in Sources */,
 				A0C33BC7290AE6040058DCE0 /* AppDelegate.swift in Sources */,
 				A0B5D68329117E1000DD3C65 /* UIViewController + Exs.swift in Sources */,
@@ -394,6 +385,7 @@
 				A03B267E29198B19005BC898 /* String + Exs.swift in Sources */,
 				A0B5D6872911B9A300DD3C65 /* ProfileScreenController.swift in Sources */,
 				A03B268C291AE633005BC898 /* FireBaseServices.swift in Sources */,
+				A01CAA75291ED17300CF868B /* KeyboardPresentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

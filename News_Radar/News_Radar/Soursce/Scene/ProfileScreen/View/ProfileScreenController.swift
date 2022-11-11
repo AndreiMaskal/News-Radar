@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import Firebase
 
 class ProfileScreenController: UIViewController {
     
@@ -55,15 +54,10 @@ class ProfileScreenController: UIViewController {
     
     // MARK: - Actions
     @objc func exitProfile() {
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print(error)
-        }
+        FireBaseServices().logOut()
         navigationController?.pushViewController(LoginViewController(), animated: false)
         navigationController?.isNavigationBarHidden = true
         navigationController?.tabBarController?.tabBar.isHidden = true
-        
     }
     
     // MARK: - Metrics
