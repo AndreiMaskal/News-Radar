@@ -1,5 +1,5 @@
 //
-//  String + Exs.swift
+//  String + Ext.swift
 //  News_Radar
 //
 //  Created by Andrei Maskal on 07/11/2022.

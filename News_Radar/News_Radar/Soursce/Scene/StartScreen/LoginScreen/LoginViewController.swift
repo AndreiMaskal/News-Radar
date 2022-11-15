@@ -11,8 +11,8 @@ class LoginViewController: UIViewController {
     
     // MARK: - Elements
     
-    private let minWidhtPassword = Metric.minWidhtPassword
-    private let maxWidhtPassword = Metric.maxWidhtPassword
+     let minWidhtPassword = Metric.minWidhtPassword
+     let maxWidhtPassword = Metric.maxWidhtPassword
     
     private lazy var regex = "^?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*])[A-Zz-a\\d$@$!%*]{}$"
     
@@ -22,8 +22,8 @@ class LoginViewController: UIViewController {
         imageView.image = image
         return imageView
     }()
-    
-    private lazy var scrollView: UIScrollView = {
+        
+    lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: view.bounds)
         return scrollView
     }()
@@ -33,7 +33,7 @@ class LoginViewController: UIViewController {
         let font = UIFont(name: Font.hiragino,
                           size:MetricText.titleLabelFontSize)
         label.font = font
-        label.text = MetricText.createTitleLabel
+        label.text = MetricText.titleLabel
         label.textColor = Color.black.color
         return label
     }()
@@ -93,7 +93,7 @@ class LoginViewController: UIViewController {
         let font = UIFont(name: Font.hiragino,
                           size: MetricText.loginButtonFontSize)
         button.titleLabel?.font = font
-        button.setTitle(MetricText.createTitleButton, for: .normal)
+        button.setTitle(MetricText.loginTitleButton, for: .normal)
         button.setTitleColor(Color.yellow.color, for: .normal)
         button.addTarget(self, action: #selector(actionLogin), for: .touchUpInside)
         button.backgroundColor = Color.grey.color
@@ -106,7 +106,7 @@ class LoginViewController: UIViewController {
                           size: 15)
         button.titleLabel?.font = font
         button.setTitleColor(Color.black.color, for: .normal)
-        button.setTitle(MetricText.changeLoginTitleButton, for: .normal)
+        button.setTitle(MetricText.changeCreateTitButton, for: .normal)
         button.addTarget(self, action: #selector(changeTitleButton), for: .touchUpInside)
         return button
     }()
@@ -132,7 +132,7 @@ class LoginViewController: UIViewController {
         return label
     }()
     
-    private var switchUp: Bool = true {
+    private var switchUp: Bool = false {
         willSet {
             if newValue {
                 titleLabel.text = MetricText.createTitleLabel
@@ -152,14 +152,18 @@ class LoginViewController: UIViewController {
         }
     }
     
+    deinit {
+        removeKeyboardNotification()
+    }
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        registerForKeyboardNotification()
         setupView()
         setupHierarchy()
         setupLoyaut()
+        registerForKeyboardNotification()
     }
     
     // MARK: - Private functions
@@ -170,7 +174,6 @@ class LoginViewController: UIViewController {
     }
     
     private func setupHierarchy() {
-        
         view.addSubview(scrollView)
         scrollView.addSubview(newsImageView)
         newsImageView.addSubview(logoLabel)
@@ -182,7 +185,6 @@ class LoginViewController: UIViewController {
         scrollView.addSubview(textEntryModeSwitchButton)
         scrollView.addSubview(messageLabel)
         scrollView.addSubview(changeButton)
-        
     }
     
     private func setupLoyaut() {
@@ -254,23 +256,6 @@ class LoginViewController: UIViewController {
     
     // MARK: - Actions
     
-    func registerForKeyboardNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(kbWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(kbWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    @objc func kbWillShow(_ notification: Notification) {
-        let userInfo = notification.userInfo
-        let kbFrameSize = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        scrollView.contentOffset = CGPoint(x: 0, y: kbFrameSize.height - 50)
-    }
-    
-    @objc func kbWillHide() {
-       scrollView.contentOffset = CGPoint(x: 0, y: -50)
-        
-    }
-    
     @objc func actionLogin() {
         let email = loginTextField.text ?? ""
         let password = passwordTextField.text ?? ""
@@ -310,7 +295,15 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func checkValidation(password: String) {
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alert, animated: true)
+    }
+    
+    // MARK: - Functions
+    
+    func checkValidation(password: String) {
         guard password.count + 1 >= minWidhtPassword else {
             messageLabel.textColor = Color.red.color
             messageLabel.text = MetricText.negativMessageLabel
@@ -321,12 +314,6 @@ class LoginViewController: UIViewController {
             messageLabel.textColor = Color.green.color
             messageLabel.text = MetricText.positivMessageLabel
         }
-    }
-    
-    private func showAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default))
-        present(alert, animated: true)
     }
     
     // MARK: - Metrics
@@ -372,28 +359,5 @@ class LoginViewController: UIViewController {
     }
 }
 
-extension LoginViewController: UITextFieldDelegate {
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard  let text = textField.text,
-               let rangeOfTextToReplace = Range(range, in: text) else { return false }
-        let res: String
-        if range.length == 1 {
-            let end = text.index(text.startIndex, offsetBy: text.count - 1)
-            res = String(text[text.startIndex...end])
-        } else {
-            res = text
-        }
-        checkValidation(password: res)
-        textField.text = res
-        let subsStringToReplace = text[rangeOfTextToReplace]
-        let count = text.count - subsStringToReplace.count + string.count
-        return count <= maxWidhtPassword
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        actionLogin()
-        return true
-    }
-}
+        
 
