@@ -55,7 +55,7 @@ class ProfileScreenController: UIViewController {
     // MARK: - Actions
     @objc func exitProfile() {
         FireBaseServices().logOut()
-        navigationController?.pushViewController(LoginViewController(), animated: false)
+        navigationController?.pushViewController(LoginViewController(), animated: true)
         navigationController?.isNavigationBarHidden = true
         navigationController?.tabBarController?.tabBar.isHidden = true
     }

@@ -16,30 +16,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="News" translatesAutoresizingMaskIntoConstraints="NO" id="ITM-mK-Gtf">
-                                <rect key="frame" x="160" y="387" width="70" height="70"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" image="News" translatesAutoresizingMaskIntoConstraints="NO" id="ITM-mK-Gtf">
+                                <rect key="frame" x="160" y="393.66666666666669" width="70" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="6jP-hO-RgS"/>
-                                    <constraint firstAttribute="height" constant="70" id="gwR-mg-GiD"/>
+                                    <constraint firstAttribute="height" constant="70" id="8Uv-3d-jgi"/>
+                                    <constraint firstAttribute="width" constant="70" id="FP0-NZ-DXp"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News Radar 2022" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6oq-6S-qVX">
-                                <rect key="frame" x="110" y="774.66666666666663" width="170" height="20.333333333333371"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.61432865830000005" green="0.91477318740000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" red="0.089094065656565635" green="0.059963752869996105" blue="0.011052239291315033" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.090196078431372548" green="0.058823529411764705" blue="0.011764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6oq-6S-qVX" secondAttribute="trailing" constant="110" id="1YP-zv-lw1"/>
-                            <constraint firstItem="6oq-6S-qVX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="110" id="Hys-aL-4Ql"/>
-                            <constraint firstAttribute="trailing" secondItem="ITM-mK-Gtf" secondAttribute="trailing" constant="160" id="Jj1-YR-KEe"/>
-                            <constraint firstItem="6oq-6S-qVX" firstAttribute="top" secondItem="ITM-mK-Gtf" secondAttribute="bottom" constant="317.67000000000002" id="O24-3N-Jop"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ITM-mK-Gtf" secondAttribute="bottom" constant="353" id="tra-RB-Awi"/>
-                            <constraint firstItem="6oq-6S-qVX" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-15" id="y4g-Yz-skh"/>
-                            <constraint firstItem="ITM-mK-Gtf" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="160" id="yXg-wB-ytl"/>
+                            <constraint firstItem="ITM-mK-Gtf" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="6Dy-qb-5Sq"/>
+                            <constraint firstItem="ITM-mK-Gtf" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="P82-Rp-hPJ"/>
                         </constraints>
                     </view>
                 </viewController>
