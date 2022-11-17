@@ -44,12 +44,73 @@ class NewsScreenView: UIView {
         return button
     }()
     
+    private lazy var separatorLine: UIView = {
+        let separator = UIView()
+        separator.backgroundColor = .systemGray4
+        return separator
+    }()
     
-    
-    
+    private let stack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 10
+        return stack
+    }()
     
     // MARK: - Lifecycle
-    // MARK: - Private functions
+    
+    init() {
+        super.init(frame: .zero)
+        setupHierarchy()
+        setupView()
+        setupLoyaut()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Private function
+    
+    private func setupHierarchy() {
+        addSubview(stack)
+        addSubview(mainTableView)
+        addSubview(separatorLine)
+        stack.addArrangedSubview(searchNews)
+        stack.addArrangedSubview(searchButton)
+    }
+    
+    private func setupView() {
+        
+    }
+    
+    private func setupLoyaut() {
+        
+        stack.snp.makeConstraints { make in
+            make.top.equalTo(70)
+            make.trailing.equalTo(-20)
+            make.leading.equalTo(20)
+            make.height.equalTo(50)
+        }
+        
+        separatorLine.snp.makeConstraints { make in
+            make.top.equalTo(stack.snp.bottom).offset(20)
+            make.trailing.equalTo(-20)
+            make.leading.equalTo(20)
+            make.height.equalTo(2)
+        }
+        
+        mainTableView.snp.makeConstraints { make in
+            make.top.equalTo(separatorLine.snp.bottom)
+            make.left.equalTo(self.snp.left)
+            make.right.equalTo(self.snp.right)
+            make.bottom.equalTo(self.snp.bottom)
+        }
+        
+        
+    }
+    
+    
     // MARK: - Actions
     
     @objc func actionSearch() {

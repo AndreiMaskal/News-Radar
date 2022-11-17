@@ -8,8 +8,17 @@
 import UIKit
 import SnapKit
 
-class NewsScreenTableViewCell: UITableView {
+class NewsScreenTableViewCell: UITableViewCell {
     
    static let identification = "NewsScreenTableViewCell"
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .value1, reuseIdentifier: NewsScreenTableViewCell.identification)
+
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 }
