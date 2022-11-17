@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A017A3CE2926B5AD008172A0 /* MainShortInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A017A3CD2926B5AD008172A0 /* MainShortInformation.swift */; };
+		A017A3D02926B8C9008172A0 /* NewsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A017A3CF2926B8C9008172A0 /* NewsScreenView.swift */; };
+		A017A3D22926BA5F008172A0 /* NewsScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A017A3D12926BA5F008172A0 /* NewsScreenTableViewCell.swift */; };
 		A01CAA75291ED17300CF868B /* ShowKeyBoardController + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01CAA74291ED17300CF868B /* ShowKeyBoardController + Ext.swift */; };
 		A03B267E29198B19005BC898 /* String + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B267D29198B19005BC898 /* String + Ext.swift */; };
 		A03B2680291AE145005BC898 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A03B267F291AE145005BC898 /* GoogleService-Info.plist */; };
@@ -38,6 +41,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A017A3CD2926B5AD008172A0 /* MainShortInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainShortInformation.swift; sourceTree = "<group>"; };
+		A017A3CF2926B8C9008172A0 /* NewsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsScreenView.swift; sourceTree = "<group>"; };
+		A017A3D12926BA5F008172A0 /* NewsScreenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsScreenTableViewCell.swift; sourceTree = "<group>"; };
 		A01CAA74291ED17300CF868B /* ShowKeyBoardController + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowKeyBoardController + Ext.swift"; sourceTree = "<group>"; };
 		A03B267D29198B19005BC898 /* String + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Ext.swift"; sourceTree = "<group>"; };
 		A03B267F291AE145005BC898 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -159,6 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				A0B5D6842911B8B600DD3C65 /* NewsScreenController.swift */,
+				A017A3CF2926B8C9008172A0 /* NewsScreenView.swift */,
+				A017A3D12926BA5F008172A0 /* NewsScreenTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -182,6 +190,7 @@
 		A0B5D6902911C0F500DD3C65 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A017A3CD2926B5AD008172A0 /* MainShortInformation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -397,9 +406,11 @@
 				A0B5D6982911C1F200DD3C65 /* ProfileScreenPresenter.swift in Sources */,
 				A0B5D6A22914642700DD3C65 /* Font.swift in Sources */,
 				A0C33BC7290AE6040058DCE0 /* AppDelegate.swift in Sources */,
+				A017A3D22926BA5F008172A0 /* NewsScreenTableViewCell.swift in Sources */,
 				A0D660D429211F01003337AA /* TextFieldLoginController + Ext.swift in Sources */,
 				A0B5D68329117E1000DD3C65 /* UIViewController + Ext.swift in Sources */,
 				A0B5D68A2911BF1A00DD3C65 /* Color.swift in Sources */,
+				A017A3CE2926B5AD008172A0 /* MainShortInformation.swift in Sources */,
 				A0B5D6922911C15300DD3C65 /* NewsScreenPresenter.swift in Sources */,
 				A0C33BDB290AEA3A0058DCE0 /* MainTabBarController.swift in Sources */,
 				A0B5D69A2911C20E00DD3C65 /* ProfileScreenAsembler.swift in Sources */,
@@ -410,6 +421,7 @@
 				A0B5D6852911B8B600DD3C65 /* NewsScreenController.swift in Sources */,
 				A0B5D6A029145E4700DD3C65 /* LoginViewController.swift in Sources */,
 				A0B5D6A429158EE700DD3C65 /* Corners.swift in Sources */,
+				A017A3D02926B8C9008172A0 /* NewsScreenView.swift in Sources */,
 				A03B267E29198B19005BC898 /* String + Ext.swift in Sources */,
 				A0B5D6872911B9A300DD3C65 /* ProfileScreenController.swift in Sources */,
 				A03B268C291AE633005BC898 /* FireBaseServices.swift in Sources */,
