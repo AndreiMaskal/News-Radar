@@ -30,6 +30,6 @@ extension LoginViewController {
     }
     
     @objc private func kbWillHide() {
-        scrollView.contentOffset = CGPoint(x: 0, y: -50)
+        scrollView.contentOffset = CGPoint(x: 0, y: 0)
     }
 }

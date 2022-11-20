@@ -30,6 +30,7 @@
 		A0B5D6A029145E4700DD3C65 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D69F29145E4700DD3C65 /* LoginViewController.swift */; };
 		A0B5D6A22914642700DD3C65 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D6A12914642700DD3C65 /* Font.swift */; };
 		A0B5D6A429158EE700DD3C65 /* Corners.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D6A329158EE700DD3C65 /* Corners.swift */; };
+		A0C2A2DC292A569A001DB2FC /* UIWindow + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C2A2DB292A569A001DB2FC /* UIWindow + Ext.swift */; };
 		A0C33BC7290AE6040058DCE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C33BC6290AE6040058DCE0 /* AppDelegate.swift */; };
 		A0C33BC9290AE6040058DCE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C33BC8290AE6040058DCE0 /* SceneDelegate.swift */; };
 		A0C33BD0290AE6050058DCE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0C33BCF290AE6050058DCE0 /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 		A0B5D69F29145E4700DD3C65 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A0B5D6A12914642700DD3C65 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		A0B5D6A329158EE700DD3C65 /* Corners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Corners.swift; sourceTree = "<group>"; };
+		A0C2A2DB292A569A001DB2FC /* UIWindow + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow + Ext.swift"; sourceTree = "<group>"; };
 		A0C33BC3290AE6040058DCE0 /* News_Radar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News_Radar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0C33BC6290AE6040058DCE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0C33BC8290AE6040058DCE0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			children = (
 				A0B5D68229117E1000DD3C65 /* UIViewController + Ext.swift */,
 				A03B267D29198B19005BC898 /* String + Ext.swift */,
+				A0C2A2DB292A569A001DB2FC /* UIWindow + Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0B5D6982911C1F200DD3C65 /* ProfileScreenPresenter.swift in Sources */,
+				A0C2A2DC292A569A001DB2FC /* UIWindow + Ext.swift in Sources */,
 				A0B5D6A22914642700DD3C65 /* Font.swift in Sources */,
 				A0C33BC7290AE6040058DCE0 /* AppDelegate.swift in Sources */,
 				A017A3D22926BA5F008172A0 /* NewsScreenTableViewCell.swift in Sources */,

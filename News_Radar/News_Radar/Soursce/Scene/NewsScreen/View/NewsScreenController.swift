@@ -11,7 +11,8 @@ class NewsScreenController: UIViewController {
     
     // MARK: - Elements
     
-    private var model: [MainShortInformation] = []
+    private var model = MainShortInformation.model
+    
     
     private var newsScreenView: NewsScreenView? {
         guard isViewLoaded else { return nil }
@@ -59,6 +60,13 @@ class NewsScreenController: UIViewController {
 
 extension NewsScreenController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        70
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension NewsScreenController: UITableViewDataSource {
@@ -67,11 +75,12 @@ extension NewsScreenController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-//        let model = model[indexPath.row]
-//
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsScreenTableViewCell.identification) as? NewsScreenTableViewCell else { return UITableViewCell() }
-//
+        let model = model[indexPath.row]
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsScreenTableViewCell.identification) as? NewsScreenTableViewCell else { return UITableViewCell() }
+        
+        cell.configure(with: model)
+
         return cell
     }
     

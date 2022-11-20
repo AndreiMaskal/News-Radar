@@ -27,17 +27,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 Auth.auth().addStateDidChangeListener { auth, user in
                     if user == nil {
-                        let navigationController = UINavigationController(rootViewController: LoginViewController())
-                        let window = UIWindow(windowScene: windowScene)
-                        window.rootViewController = navigationController
-                        window.makeKeyAndVisible()
-                        self?.window = window
+                        window.switchRootViewController(to: LoginViewController())
+    
                     } else {
-                        let navigationController = UINavigationController(rootViewController: MainTabBarController())
-                        let window = UIWindow(windowScene: windowScene)
-                        window.rootViewController = navigationController
-                        window.makeKeyAndVisible()
-                        self?.window = window
+
+                        window.switchRootViewController(to: MainTabBarController())
                     }
                 }
             })

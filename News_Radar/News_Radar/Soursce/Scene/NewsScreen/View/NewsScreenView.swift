@@ -70,6 +70,7 @@ class NewsScreenView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     // MARK: - Private function
     
     private func setupHierarchy() {

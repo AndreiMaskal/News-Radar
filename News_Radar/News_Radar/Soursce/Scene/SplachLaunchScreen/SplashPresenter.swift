@@ -42,7 +42,7 @@ final class SplashPresenter: SplashPresenterDescription {
     
     func dismiss(complition: (() -> Void)?) {
         UIView.animate(withDuration: 1) {
-            self.foregroundSplashWindow.alpha = 0.5
+            self.foregroundSplashWindow.alpha = 1
         } completion: { (_) in
             complition?()
         }
