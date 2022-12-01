@@ -58,9 +58,9 @@ class NewsScreenTableViewCell: UITableViewCell {
         }
     }
     
-    func configure(with model: MainShortInformation?) {
-        cardNameLabel.text = model?.contry
-        cardTypeLabel.text = model?.shortInfo
+    func configure(with country: String, shortInfo: String) {
+        cardNameLabel.text = country
+        cardTypeLabel.text = shortInfo
     }
 
 }

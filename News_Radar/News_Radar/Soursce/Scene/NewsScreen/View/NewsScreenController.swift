@@ -7,12 +7,21 @@
 
 import UIKit
 
+protocol MainViewProtocol: AnyObject {
+
+    func setInfo(contry: String, shortInfo: String)
+    func setRows(count: Int)
+}
+
+
 class NewsScreenController: UIViewController {
     
     // MARK: - Elements
     
-    private var model = MainShortInformation.model
-    
+    var country = String()
+    var shortInfo = String()
+    var countRows = Int()
+    var presenter: MainViewPresenterProtocol?
     
     private var newsScreenView: NewsScreenView? {
         guard isViewLoaded else { return nil }
@@ -71,17 +80,29 @@ extension NewsScreenController: UITableViewDelegate {
 
 extension NewsScreenController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count
+        presenter?.getCountRows()
+        return countRows
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = model[indexPath.row]
 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsScreenTableViewCell.identification) as? NewsScreenTableViewCell else { return UITableViewCell() }
         
-        cell.configure(with: model)
+        presenter?.getInfo(index: indexPath)
+        cell.configure(with: country, shortInfo: shortInfo)
 
         return cell
+    }
+}
+
+extension NewsScreenController: MainViewProtocol {
+    func setInfo(contry: String, shortInfo: String) {
+        self.country = contry
+        self.shortInfo = shortInfo
+    }
+    
+    func setRows(count: Int) {
+        self.countRows = count
     }
     
     
