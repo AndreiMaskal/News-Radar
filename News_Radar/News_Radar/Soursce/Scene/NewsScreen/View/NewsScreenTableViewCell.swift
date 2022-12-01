@@ -26,11 +26,21 @@ class NewsScreenTableViewCell: UITableViewCell {
         return label
     }()
     
+    private lazy var infoImageView: UIImageView = {
+        let imageView = UIImageView()
+        let image = UIImage(named: "images")
+        imageView.image = image
+        
+        return imageView
+    }()
+    
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: NewsScreenTableViewCell.identification)
         
         contentView.addSubview(cardNameLabel)
         contentView.addSubview(cardTypeLabel)
+        contentView.addSubview(infoImageView)
 
     }
     
@@ -42,6 +52,7 @@ class NewsScreenTableViewCell: UITableViewCell {
         super.prepareForReuse()
         cardTypeLabel.text = nil
         cardNameLabel.text = nil
+        infoImageView.image = nil
     }
     
     override func layoutSubviews() {
@@ -56,11 +67,20 @@ class NewsScreenTableViewCell: UITableViewCell {
             make.top.equalTo(cardNameLabel.snp.bottom).offset(10)
             make.left.equalTo(cardNameLabel.snp.left)
         }
+        
+        infoImageView.snp.makeConstraints { make in
+            make.top.equalTo(contentView.snp.top).offset(5)
+            make.right.equalTo(contentView.snp.right).offset(-17)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-5)
+            make.height.width.equalTo(50)
+        }
     }
     
-    func configure(with country: String, shortInfo: String) {
+    func configure(with country: String, shortInfo: String, imageInfo: String) {
         cardNameLabel.text = country
         cardTypeLabel.text = shortInfo
+        let image = UIImage(named: imageInfo)
+        infoImageView.image = image
     }
 
 }

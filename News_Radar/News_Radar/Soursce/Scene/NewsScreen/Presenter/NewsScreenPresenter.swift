@@ -26,7 +26,8 @@ final class Presenter: MainViewPresenterProtocol {
     func getInfo(index: IndexPath) {
         let country = info[index.row].contry
         let shortInfo = info[index.row].shortInfo
-        view?.setInfo(contry: country ?? "", shortInfo: shortInfo ?? "")
+        let imageInfo = info[index.row].icon
+        view?.setInfo(contry: country ?? "", shortInfo: shortInfo ?? "", imageInfo: imageInfo ?? "")
     }
     
     func getCountRows() {

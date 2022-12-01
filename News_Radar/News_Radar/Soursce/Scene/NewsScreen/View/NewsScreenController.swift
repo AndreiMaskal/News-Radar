@@ -9,10 +9,9 @@ import UIKit
 
 protocol MainViewProtocol: AnyObject {
 
-    func setInfo(contry: String, shortInfo: String)
+    func setInfo(contry: String, shortInfo: String, imageInfo: String)
     func setRows(count: Int)
 }
-
 
 class NewsScreenController: UIViewController {
     
@@ -20,6 +19,7 @@ class NewsScreenController: UIViewController {
     
     var country = String()
     var shortInfo = String()
+    var imageInfo = String()
     var countRows = Int()
     var presenter: MainViewPresenterProtocol?
     
@@ -89,16 +89,17 @@ extension NewsScreenController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsScreenTableViewCell.identification) as? NewsScreenTableViewCell else { return UITableViewCell() }
         
         presenter?.getInfo(index: indexPath)
-        cell.configure(with: country, shortInfo: shortInfo)
+        cell.configure(with: country, shortInfo: shortInfo, imageInfo: imageInfo)
 
         return cell
     }
 }
 
 extension NewsScreenController: MainViewProtocol {
-    func setInfo(contry: String, shortInfo: String) {
+    func setInfo(contry: String, shortInfo: String, imageInfo: String) {
         self.country = contry
         self.shortInfo = shortInfo
+        self.imageInfo = imageInfo
     }
     
     func setRows(count: Int) {
